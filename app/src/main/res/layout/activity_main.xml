@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <!-- binding object of ViewModel to the XML layout -->
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.flightgearappandroid.viewModel.ViewModel" />
+    </data>
+    <!-- Provided Linear layout for the activity components -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="top"
+        android:layout_margin="8dp"
+        android:background="#168BC34A"
+        android:orientation="vertical">
+
+        <!-- TextView for the heading of the activity -->
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="395dp"
+            android:layout_height="wrap_content"
+            android:text="Fg App"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_green_dark"
+            android:textSize="36sp"
+            android:textStyle="bold" />
+
+
+
+        <EditText
+            android:id="@+id/inEmail"
+            android:layout_width="395dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/ip_hint"
+            android:inputType="textEmailAddress"
+            android:padding="8dp"
+            android:text="@={viewModel.userIp}"
+            bind:layout_editor_absoluteY="82dp" />
+
+        <EditText
+            android:id="@+id/inPassword"
+            android:layout_width="395dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/port_hint"
+            android:inputType="textEmailAddress"
+            android:padding="8dp"
+            android:text="@={viewModel.userPort}"
+            bind:layout_editor_absoluteY="122dp" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="395dp"
+            android:layout_height="wrap_content"
+            android:background="#4CAF50"
+            android:onClick="@{()-> viewModel.onButtonClicked()}"
+            android:text="@string/Button_text"
+            android:textColor="@android:color/background_light"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            bind:layout_editor_absoluteY="174dp"
+            bind:toastMessage="@{viewModel.toastMessage}" />
+
+        <SeekBar
+            android:id="@+id/seekBar4"
+            android:layout_width="137dp"
+            android:layout_height="138dp"
+            android:max="100"
+            android:onProgressChanged="@{()->viewModel.changeThrottle()}"
+            android:progress="@={viewModel.userThrottle}"
+            android:rotation="-90"
+            bind:layout_editor_absoluteX="10dp"
+            bind:layout_editor_absoluteY="383dp" />
+
+        <SeekBar
+            android:id="@+id/seekBar5"
+            android:layout_width="145dp"
+            android:layout_height="138dp"
+            android:max="200"
+            android:onProgressChanged="@{()->viewModel.changeRudder()}"
+            android:progress="@={viewModel.userRudder}"
+            bind:layout_editor_absoluteX="109dp"
+            bind:layout_editor_absoluteY="521dp" />
+
+        <com.example.flightgearappandroid.views.JoyStick
+            android:id="@+id/joyStick"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"></com.example.flightgearappandroid.views.JoyStick>
+
+    </LinearLayout>
+
+</layout>
